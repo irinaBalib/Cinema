@@ -1,0 +1,12 @@
+﻿@model List<CINEMA.DB.Categories>
+
+
+<ul class="list-group">
+    @foreach (var category in Model)
+    {
+        <li class="list-group-item">@category.Title</li>
+        <ul class="list-group">
+           @*getting movies for this category..?*@
+        </ul>
+    }
+</ul>

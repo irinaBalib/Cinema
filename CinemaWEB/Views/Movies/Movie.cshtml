@@ -1,0 +1,16 @@
+﻿@model ??
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Movies</li>
+    </ol>
+</nav>
+
+    <div class="media border p-3">
+        <img src=@Html.DisplayNameFor(model => model.Image) Image alt="pic" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+        <div class="media-body">
+            <h4>@Html.DisplayNameFor(model => model.Title)</h4>
+            <small><i>@Html.DisplayNameFor(model => model.Duration) min</i></small>
+            <p>@Html.DisplayNameFor(model => model.Text)</p>
+        </div>
+    </div>
+

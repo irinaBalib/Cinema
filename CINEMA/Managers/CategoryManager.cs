@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CINEMA.Managers
 {
-    class CategoryManager
+    public class CategoryManager
     {
         public List<Categories> GetAllCategories()
         {

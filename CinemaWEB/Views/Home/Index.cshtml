@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<CINEMA.DB.Movies>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Movies</li>
+    </ol>
+</nav>
+<div class="card-group">
+    @foreach(var movie in Model)
+    {
+    <div class="card">
+        <img class="card-img-top" src="@movie.Image" alt="Card image cap">
+        <div class="card-body">
+            <a class="card-title" asp-controller="Home" asp-action="Movie">@movie.Title</a>
+            <a class="card-text">@movie.Text</a>
+            <p class="card-text"><small class="text-muted">@movie.Duration min</small></p>
+        </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Please select time
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+        </div>
+    </div>
+        }
+ </div>

@@ -6,32 +6,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CinemaWEB.Models;
+using CINEMA.Managers;
 
 namespace CinemaWEB.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private MovieManager mm = new MovieManager();
+        public IActionResult Index()   
         {
-            _logger = logger;
+            var data = mm.GetAllMovies();
+            return View(data);
         }
 
-        public IActionResult Index()
+        public IActionResult About()
         {
             return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
