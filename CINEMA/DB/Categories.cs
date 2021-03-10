@@ -13,14 +13,5 @@ namespace CINEMA.DB
         public int Id { get; set; }
         public string Title { get; set; }
 
-        
-        public List<Movies> GetMoviesByCategory(int categoryId)
-        {
-            using (CinemaDatabase db = new CinemaDatabase())
-            {
-                return db.Movies.Where(m => m.CategoryId == categoryId).ToList();
-            }
-
-        }
     }
 }

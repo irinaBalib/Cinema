@@ -1,4 +1,5 @@
-﻿@model CINEMA.DB.Movies
+﻿@model CINEMA.GettingData
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">Movie Info</li>
@@ -6,29 +7,29 @@
 </nav>
 
 <div class="card text-center">
-    <div class="card-header">
-        @Model.GetCategoryTitle(Model.CategoryId)
-    </div>
-    <div class="card-body">
-        <h5 class="card-title">@Model.Title</h5>
-        <p class="card-text">@Model.Text</p>
-
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Please select time
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                //loop through timetable with movie id to get time
-                @foreach (var m in Model.GetMovieTime(Model.Id))
-                {
-                    <a class="dropdown-item" href="#">@m.StartTime</a>
-                }
-            </div>
+    @*  <div class="card-header">
+         @Model.ListOfCategories.FirstOrDefault(c => c.Id == Model.Movie.CategoryId).Title;
         </div>
+        <div class="card-body">
+            <h5 class="card-title">@Model.Title</h5>
+            <p class="card-text">@Model.Text</p>
 
-        <a href="#" class="btn btn-primary" asp-controller="Movies" asp-action="Book" asp-route-title="@Model.Title">Book</a>
-    </div>
-    <div class="card-footer text-muted">
-        @Model.Duration
-    </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Please select time
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    //loop through timetable with movie id to get time
+                    @foreach (var m in Model.GetMovieTime(Model.Id))
+                    {
+                        <a class="dropdown-item" href="#">@m.StartTime</a>
+                    }
+                </div>
+            </div>
+
+            <a href="#" class="btn btn-primary" asp-controller="Movies" asp-action="Book" asp-route-title="@Model.Title">Book</a>
+        </div>
+        <div class="card-footer text-muted">
+            @Model.Duration
+        </div>*@
 </div>

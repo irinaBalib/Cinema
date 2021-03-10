@@ -17,19 +17,6 @@ namespace CINEMA.DB
         public int Duration { get; set; }
         public string Image { get; set; }
 
-        public List<Timetable> GetMovieTime(int id)
-        {
-            using (CinemaDatabase db = new CinemaDatabase())
-            {
-                return db.Timetable.Where(t => t.MovieId == id).ToList();
-            }
-        }
-        public string GetCategoryTitle(int id)
-        {
-            using (CinemaDatabase db = new CinemaDatabase())
-            {
-                return db.Categories.FirstOrDefault(c => c.Id == id).Title;
-            }
-        }
+        
     }
 }

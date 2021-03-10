@@ -16,6 +16,7 @@ namespace CINEMA.Managers
             }
         }
 
+        
         //public string GetMovieTitle(int id)
         //{
         //    using (CinemaDatabase db = new CinemaDatabase())

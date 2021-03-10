@@ -1,4 +1,5 @@
-﻿@model List<CINEMA.DB.Movies>
+﻿@model CINEMA.GettingData
+
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -6,12 +7,12 @@
     </ol>
 </nav>
 <div class="list-unstyled">
-    @foreach (var movie in Model)
+    @foreach (var movie in Model.ListOfMovies)
     {
         <div class="media p-2">
             <img class="align-self-start mr-3" src="@movie.Image" alt="Card image cap">
             <div class="media-body">
-                <a class="h2 mt-0" asp-controller="Movies" asp-action="Movie" asp-route-title="@movie.Id">@movie.Title</a>
+                <a class="h2 mt-0" asp-controller="Movies" asp-action="Movie" asp-route-id="@movie.Id">@movie.Title</a>
                 <p>@movie.Text</p>
                 <p class="mb-3"><small class="text-muted">@movie.Duration min</small></p>
                 
@@ -20,9 +21,9 @@
                         Please select time
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        @foreach (var t in movie.GetMovieTime(movie.Id))
+                        @foreach (var t in Model.Timetables.Where(t => movie.Id == t.MovieId))
                         {
-                        <a class="dropdown-item" asp-controller="Movies" asp-action="SelectTime" asp-route-title="@t.StartTime">@t.StartTime</a>
+                        <a class="dropdown-item" asp-controller="Movies" asp-action="SelectTime" asp-route-starttime="@t.StartTime">@t.StartTime</a>
                         }
                     </div>
                 </div>
@@ -32,4 +33,5 @@
         </div>
   }
  </div>
+
 
