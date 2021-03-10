@@ -1,16 +1,34 @@
-﻿@model ??
+﻿@model CINEMA.DB.Movies
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Movies</li>
+        <li class="breadcrumb-item active" aria-current="page">Movie Info</li>
     </ol>
 </nav>
 
-    <div class="media border p-3">
-        <img src=@Html.DisplayNameFor(model => model.Image) Image alt="pic" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-        <div class="media-body">
-            <h4>@Html.DisplayNameFor(model => model.Title)</h4>
-            <small><i>@Html.DisplayNameFor(model => model.Duration) min</i></small>
-            <p>@Html.DisplayNameFor(model => model.Text)</p>
-        </div>
+<div class="card text-center">
+    <div class="card-header">
+        @Model.GetCategoryTitle(Model.CategoryId)
     </div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title</h5>
+        <p class="card-text">@Model.Text</p>
 
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Please select time
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                //loop through timetable with movie id to get time
+                @foreach (var m in Model.GetMovieTime(Model.Id))
+                {
+                    <a class="dropdown-item" href="#">@m.StartTime</a>
+                }
+            </div>
+        </div>
+
+        <a href="#" class="btn btn-primary" asp-controller="Movies" asp-action="Book" asp-route-title="@Model.Title">Book</a>
+    </div>
+    <div class="card-footer text-muted">
+        @Model.Duration
+    </div>
+</div>

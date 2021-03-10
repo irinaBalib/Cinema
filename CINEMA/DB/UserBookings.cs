@@ -12,5 +12,7 @@ namespace CINEMA.DB
         public int Id { get; set; }
         public int TimetableId { get; set; }
         public int Quantity { get; set; }
+
+
     }
 }

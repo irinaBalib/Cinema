@@ -1,12 +1,21 @@
 ﻿@model List<CINEMA.DB.Categories>
 
 
-<ul class="list-group">
+<div class="list-group">
     @foreach (var category in Model)
     {
-        <li class="list-group-item">@category.Title</li>
-        <ul class="list-group">
-           @*getting movies for this category..?*@
-        </ul>
+        <h5 class="mb-1 lead">@category.Title</h5>
+        <div class="media border p-3">
+            @foreach (var movie in category.GetMoviesByCategory(category.Id))
+            {
+                    <img src=@movie.Image Image alt="pic" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+                    <div class="media-body">
+                        <a class="h4" asp-controller="Home" asp-action="Movie" asp-route-title="@movie.Title">@movie.Title</a>
+                        <small><i>@movie.Duration min</i></small>
+                        <p>@movie.Text</p>
+                    </div>
+            }
+        </div>
     }
-</ul>
+</div>
+

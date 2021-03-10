@@ -11,9 +11,16 @@ namespace CinemaWEB.Controllers
     {
         private CategoryManager categories = new CategoryManager();
         private MovieManager movie = new MovieManager();
+        private BookingsManager bm = new BookingsManager();
         public IActionResult Categories()
         {
             var data = categories.GetAllCategories();
+            return View(data);
+        }
+
+        public IActionResult UserBookings()
+        {
+            var data = bm.GetAllBookings();
             return View(data);
         }
 
@@ -22,19 +29,20 @@ namespace CinemaWEB.Controllers
             var data = movie.GetMoviesByCategory(id);
             return View(data);
         }
-        public IActionResult Movie(string title)
+        public IActionResult Movie(int id)
         {
-           var data = movie.GetMovieInfo(title);
-            return View(data);
+           var data = movie.GetMovieInfo(id);
+            return  View(data);
+              
         }
 
-        public IActionResult SelectTime(string datetime)
+        public IActionResult SelectTime(DateTime datetime)
         {
-            
+            //use to create an entry to the MyBookings db
             return View();
         }
 
-        public IActionResult Book()
+        public IActionResult Book(string datetime, int movieId)
         {
             return View();
         }

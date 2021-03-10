@@ -15,5 +15,14 @@ namespace CINEMA.Managers
                 return db.Categories.OrderBy(c => c.Title).ToList();
             }
         }
+
+        //public string GetMovieTitle(int id)
+        //{
+        //    using (CinemaDatabase db = new CinemaDatabase())
+        //    {
+        //        return db.Movies.FirstOrDefault(m => m.Id == id).Title;
+        //    }
+
+        //}
     }
 }

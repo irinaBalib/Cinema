@@ -17,11 +17,11 @@ namespace CINEMA.Managers
             }
         }
 
-        public Movies GetMovieInfo(string title)
+        public Movies GetMovieInfo(int id)
         {
             using (CinemaDatabase db = new CinemaDatabase())
             {
-                return db.Movies.FirstOrDefault(m => m.Title.ToLower() == title.ToLower());
+                return db.Movies.FirstOrDefault(m => m.Id == id);
             }
         }
 
@@ -31,7 +31,7 @@ namespace CINEMA.Managers
             {
                 return db.Movies.Where(m => m.CategoryId == categoryId).ToList();
             }
-           
+
         }
     }
 }

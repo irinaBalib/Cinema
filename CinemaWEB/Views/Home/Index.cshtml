@@ -5,27 +5,31 @@
         <li class="breadcrumb-item active" aria-current="page">Movies</li>
     </ol>
 </nav>
-<div class="card-group">
-    @foreach(var movie in Model)
+<div class="list-unstyled">
+    @foreach (var movie in Model)
     {
-    <div class="card">
-        <img class="card-img-top" src="@movie.Image" alt="Card image cap">
-        <div class="card-body">
-            <a class="card-title" asp-controller="Home" asp-action="Movie">@movie.Title</a>
-            <a class="card-text">@movie.Text</a>
-            <p class="card-text"><small class="text-muted">@movie.Duration min</small></p>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Please select time
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="media p-2">
+            <img class="align-self-start mr-3" src="@movie.Image" alt="Card image cap">
+            <div class="media-body">
+                <a class="h2 mt-0" asp-controller="Movies" asp-action="Movie" asp-route-title="@movie.Id">@movie.Title</a>
+                <p>@movie.Text</p>
+                <p class="mb-3"><small class="text-muted">@movie.Duration min</small></p>
                 
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Please select time
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @foreach (var t in movie.GetMovieTime(movie.Id))
+                        {
+                        <a class="dropdown-item" asp-controller="Movies" asp-action="SelectTime" asp-route-title="@t.StartTime">@t.StartTime</a>
+                        }
+                    </div>
+                </div>
             </div>
+            
+            <a class ="btn btn-primary" asp-controller="Movies" asp-action="Book" asp-route-title="@movie.Title">Book</a>
         </div>
-    </div>
-        }
+  }
  </div>
+
