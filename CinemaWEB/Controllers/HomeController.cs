@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CinemaWEB.Models;
-using CINEMA;
+using CINEMA.Managers;
+using CINEMA.DB;
 
 namespace CinemaWEB.Controllers
 {
     public class HomeController : Controller
     {
-        //private MovieManager mm = new MovieManager();
-        private GettingData gd = new GettingData();
+        private MovieManager mm = new MovieManager();
+        private CategoryManager cm = new CategoryManager();
+        
         public IActionResult Index()   
         {
-            //var data = mm.GetAllMovies();
+            var data = mm.GetAllMovies();
           
-            return View(gd.ListOfMovies);
+            return View(data);
         }
 
         public IActionResult About()

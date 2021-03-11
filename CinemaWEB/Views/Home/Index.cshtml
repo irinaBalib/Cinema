@@ -1,13 +1,12 @@
-﻿@model CINEMA.GettingData
-
+﻿@model List<CINEMA.DB.Movies>
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Movies</li>
+        <li class="breadcrumb-item active" aria-current="page">Now in Cinema</li>
     </ol>
 </nav>
 <div class="list-unstyled">
-    @foreach (var movie in Model.ListOfMovies)
+    @foreach (var movie in Model)
     {
         <div class="media p-2">
             <img class="align-self-start mr-3" src="@movie.Image" alt="Card image cap">
@@ -15,8 +14,13 @@
                 <a class="h2 mt-0" asp-controller="Movies" asp-action="Movie" asp-route-id="@movie.Id">@movie.Title</a>
                 <p>@movie.Text</p>
                 <p class="mb-3"><small class="text-muted">@movie.Duration min</small></p>
-                
-                <div class="dropdown">
+                <a class="btn btn-primary" asp-controller="Movies" asp-action="Movie" asp-route-id="@movie.Id">Book</a>
+            </div>
+            </div>
+    }   
+ </div>
+
+        @*<div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Please select time
                     </button>
@@ -27,11 +31,4 @@
                         }
                     </div>
                 </div>
-            </div>
-            
-            <a class ="btn btn-primary" asp-controller="Movies" asp-action="Book" asp-route-title="@movie.Title">Book</a>
-        </div>
-  }
- </div>
-
-
+            </div>*@

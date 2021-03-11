@@ -1,4 +1,5 @@
 ﻿using System;
+using CINEMA.Managers;
 
 namespace CINEMA
 {
@@ -6,7 +7,13 @@ namespace CINEMA
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            MovieManager mm = new MovieManager();
+
+            foreach (var item in mm.GetAllMovies())
+            {
+                Console.WriteLine(item.Title);
+            }
+            
         }
     }
 }

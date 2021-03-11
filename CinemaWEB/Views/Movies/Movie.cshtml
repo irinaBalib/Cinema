@@ -1,35 +1,30 @@
-﻿@model CINEMA.GettingData
+﻿@model DataModel
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">Movie Info</li>
-    </ol>
-</nav>
 
 <div class="card text-center">
-    @*  <div class="card-header">
-         @Model.ListOfCategories.FirstOrDefault(c => c.Id == Model.Movie.CategoryId).Title;
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">@Model.Title</h5>
-            <p class="card-text">@Model.Text</p>
+    <div class="card-header">
+        @Model.GetCategoryTitle(Model.Movie.CategoryId).Title;
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.Movie.Title</h5>
+        <p class="card-text">@Model.Movie.Text</p>
 
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Please select time
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    //loop through timetable with movie id to get time
-                    @foreach (var m in Model.GetMovieTime(Model.Id))
-                    {
-                        <a class="dropdown-item" href="#">@m.StartTime</a>
-                    }
-                </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Please select time
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @foreach (var m in Model.GetMovieTime(Model.Movie.Id))
+                {
+                    <a class="dropdown-item" href="#">@m.StartTime</a>
+                }
             </div>
-
-            <a href="#" class="btn btn-primary" asp-controller="Movies" asp-action="Book" asp-route-title="@Model.Title">Book</a>
         </div>
-        <div class="card-footer text-muted">
-            @Model.Duration
-        </div>*@
+
+        <a href="#" class="btn btn-primary" asp-controller="Movies" asp-action="Book" asp-route-title="@Model.Movie.Id">Book</a>
+    </div>
+    <div class="card-footer text-muted">
+        @Model.Movie.Duration
+    </div>
 </div>
+

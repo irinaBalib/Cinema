@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CINEMA.Managers;
+using CinemaWEB.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaWEB.Controllers
@@ -18,6 +19,17 @@ namespace CinemaWEB.Controllers
             return View(data);
         }
 
+        public IActionResult Movie(int? id)
+        {
+            DataModel model = new DataModel();
+            //model.ListOfMovies = movie.GetAllMovies();
+            if (id.HasValue)
+            {
+                model.Movie = movie.GetMovieInfo(id);
+            }
+            return View(model);
+        }
+
         public IActionResult UserBookings()
         {
             var data = bm.GetAllBookings();
@@ -29,12 +41,7 @@ namespace CinemaWEB.Controllers
             var data = movie.GetMoviesByCategory(id);
             return View(data);
         }
-        public IActionResult Movie(int id)
-        {
-           var data = movie.GetMovieInfo(id);
-            return  View(data);
-              
-        }
+      
 
         public IActionResult SelectTime(DateTime datetime)
         {

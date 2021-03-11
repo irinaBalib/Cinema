@@ -13,11 +13,11 @@ namespace CINEMA.Managers
         {
             using (CinemaDatabase db = new CinemaDatabase())
             {
-                return db.Movies.OrderBy(c => c.Title).ToList();
+                return db.Movies.OrderBy(c => c.Id).ToList();
             }
         }
 
-        public Movies GetMovieInfo(int id)
+        public Movies GetMovieInfo(int? id)
         {
             using (CinemaDatabase db = new CinemaDatabase())
             {
@@ -34,13 +34,7 @@ namespace CINEMA.Managers
 
         }
 
-        public static List<Timetable> GetMovieTime(int id)
-        {
-            using (CinemaDatabase db = new CinemaDatabase())
-            {
-                return db.Timetable.Where(t => t.MovieId == id).ToList();
-            }
-        }
+        
 
         //public static string GetCategoryTitle(int id)
         //{
