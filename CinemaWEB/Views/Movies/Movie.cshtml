@@ -13,7 +13,7 @@
             <p>@Model.ActiveMovie.Text</p>
             <p class="mb-3"><small class="text-muted">@Model.ActiveMovie.Duration min</small></p>
             <a class="text-body">Category</a>
-            <a class="text-body" asp-controller="Movies" asp-action="Categories" asp-route="">@Model.ActiveMovie.CategoryId</a>
+            <a class="text-body" asp-controller="Movies" asp-action="Categories">@Model.ActiveMovie.CategoryId</a>
         </div>
         <a class="btn btn-primary" asp-controller="Movies" asp-action="Book" asp-route-id="@Model.ActiveMovie.Id">Book</a>
     </div>
