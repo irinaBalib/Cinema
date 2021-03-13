@@ -31,6 +31,22 @@ namespace CINEMA.Managers
                 return db.Movies.FirstOrDefault(m => m.Id == id);
             }
         }
+        public List<DateTime> GetMovieTimetable(int? id)
+        {
+            using (CinemaDatabase db = new CinemaDatabase())
+            {
+                List<DateTime> movieTimes = new List<DateTime> { };
+                foreach (var t in db.Timetable)
+                {
+                    if (t.MovieId == id)
+                    {
+                        movieTimes.Add(t.StartTime);
+                    }
+                }
 
+                return movieTimes;
+               
+            }
+        }
     }
 }

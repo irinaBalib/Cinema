@@ -13,6 +13,7 @@ namespace CinemaWEB.Controllers
         private CategoryManager categories = new CategoryManager();
         private MovieManager movie = new MovieManager();
         private BookingsManager bm = new BookingsManager();
+        private TimetableManager tm = new TimetableManager();
 
 
         public IActionResult Categories(int? id)
@@ -22,7 +23,7 @@ namespace CinemaWEB.Controllers
             if (id.HasValue)
             {
                 model.ActiveCategory = categories.GetCategory(id.Value);
-                
+
                 model.ListOfMovies = movie.GetMoviesByCategory(id.Value);
             }
             return View(model);
@@ -32,37 +33,62 @@ namespace CinemaWEB.Controllers
             DataModel model = new DataModel();
             model.ListOfMovies = movie.GetAllMovies();
             if (id.HasValue)
-            { 
+            {
                 model.ActiveMovie = movie.GetMovieById(id);
-               
+                model.CategoryTitle = categories.GetCategoryTitle(movie.GetMovieById(id).CategoryId);
+                model.MovieTimes = movie.GetMovieTimetable(id);
             }
             return View(model);
         }
+        public IActionResult Book(DateTime selectedTime)
+        {
+            DataModel model = new DataModel();
+
+            if (selectedTime != null)
+            {
+                model.SelectedMovie = tm.GetTimetableId(model.ActiveMovie.Id, selectedTime);
+
+            }
+            return RedirectToAction(nameof(UserBookings));
+        }
+        //public IActionResult SubmitBook()
+        //{
+        //    DataModel model = new DataModel();
+
+        //    if (selectedTime != null)
+        //    {
+        //        model.SelectedMovie = tm.GetTimetableId(id, selectedTime);
+
+        //    }
+        //    return RedirectToAction(nameof(UserBookings));
+        //}
+
+        public IActionResult UserBookings()
+        {
+           
+            return View();
+        }
     }
-        
-
-        //public IActionResult UserBookings()
-        //{
-        //    var data = bm.GetAllBookings();
-        //    return View(data);
-        //}
-
-        //    //public IActionResult ViewByCategory(int id)
-        //    //{
-        //    //    var data = movie.GetMoviesByCategory(id);
-        //    //    return View(data);
-        //    //}
-      
-
-        //public IActionResult SelectTime(DateTime datetime)
-        //{
-        //    //use to create an entry to the MyBookings db
-        //    return View();
-        //}
-
-        //public IActionResult Book(string datetime, int movieId)
-        //{
-        //    return View();
-        //}
-    
 }
+
+    
+
+    //    //public IActionResult ViewByCategory(int id)
+    //    //{
+    //    //    var data = movie.GetMoviesByCategory(id);
+    //    //    return View(data);
+    //    //}
+
+
+    //public IActionResult SelectTime(DateTime datetime)
+    //{
+    //    //use to create an entry to the MyBookings db
+    //    return View();
+    //}
+
+    //public IActionResult Book(string datetime, int movieId)
+    //{
+    //    return View();
+    //}
+
+

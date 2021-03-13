@@ -22,5 +22,14 @@ namespace CINEMA.Managers
                 return db.Categories.FirstOrDefault(c => c.Id == id);
             }
         }
+
+        public string GetCategoryTitle(int? movieId)
+        {
+            using (var db = new CinemaDatabase())
+            {
+                return db.Categories.FirstOrDefault(c => c.Id == movieId).Title;
+            }
+        }
+       
     }
 }

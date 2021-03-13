@@ -1,7 +1,7 @@
-﻿@*@model List<CINEMA.DB.UserBookings>
+﻿@model DataModel
         <b>There are no bookings in your list!</b>
 
-    @if (Model.Count == 0)
+    @if (Model.ListOfBooking.Count == 0)
     {
         <b>There are no bookings in your list!</b>
     }
@@ -14,14 +14,14 @@
                 <th>Tickets</th>
                 <th></th>
             </tr>
-            @foreach (var book in Model)
+            @foreach (var book in Model.ListOfBooking)
             {
                 <tr>
-                    <td>@book.TimetableId</td>
-                    <td>@book.TimetableId</td>
-                    <td>@book.Quantity</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <th></th>
                 </tr>
             }
-        </table>*@
+        </table>
 }
