@@ -17,7 +17,14 @@ namespace CINEMA.Managers
             }
         }
 
-        public Movies GetMovieInfo(int? id)
+        public List<Movies> GetMoviesByCategory(int CategoryId)
+        {
+            using (var db = new CinemaDatabase())
+            {
+                return db.Movies.Where(m => m.CategoryId == CategoryId).OrderByDescending(m => m.Title).ToList();
+            }
+        }
+        public Movies GetMovieById(int? id)
         {
             using (CinemaDatabase db = new CinemaDatabase())
             {
@@ -25,23 +32,5 @@ namespace CINEMA.Managers
             }
         }
 
-        public List<Movies> GetMoviesByCategory(int categoryId)
-        {
-            using (CinemaDatabase db = new CinemaDatabase())
-            {
-                return db.Movies.Where(m => m.CategoryId == categoryId).ToList();
-            }
-
-        }
-
-        
-
-        //public static string GetCategoryTitle(int id)
-        //{
-        //    using (CinemaDatabase db = new CinemaDatabase())
-        //    {
-        //        return db.Categories.FirstOrDefault(c => c.Id == id).Title;
-        //    }
-        //}
     }
 }

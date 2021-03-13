@@ -1,21 +1,36 @@
 ﻿@model DataModel
-<div class="list-group">
-    @foreach (var category in Model.ListOfCategories)
-    {
-        <h5 class="mb-1 lead">@category.Title</h5>
-        <div class="media border p-3">
-                @foreach (var movie in Model.ListOfMovies.Where(c => c.CategoryId == category.Id).ToList())
-                {
-                    <img src=@movie.Image Image alt="pic" class="mr-3 mt-3 rounded-circle" style="width:60px;">
-                    <div class="media-body">
-                        <a class="h4" asp-controller="Home" asp-action="Movie" asp-route-id="@movie.Id">@movie.Title</a>
-                        <small><i>@movie.Duration min</i></small>
-                        <p>@movie.Text</p>
-                    </div>
-                }
 
-            }
+<ul class="nav nav-pills mb-3">
+    @foreach (var cat in Model.ListOfCategories)
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Movies" asp-action="Categories" asp-route-id="@cat.Id">@cat.Title</a>
+        </li>
+    }
+</ul>
+@if (Model.ActiveCategory != null)
+{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">@Model.ActiveCategory.Title</li>
+        </ol>
+    </nav>
+}
+
+@if (Model.ListOfMovies != null)
+{
+<div class="media border p-3">
+    @foreach (var movie in Model.ListOfMovies)
+    {
+        <img src=@movie.Image Image alt="pic" class="mr-3 mt-3 rounded-circle" style="width:60px;">
+        <div class="media-body">
+            <a class="h4" asp-controller="Movies" asp-action="Movie" asp-route-id="@movie.Id">@movie.Title</a>
+            <small><i>@movie.Duration min</i></small>
+            <p>@movie.Text</p>
         </div>
+
     }
 </div>
+}
+
 

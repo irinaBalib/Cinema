@@ -1,30 +1,21 @@
 ﻿@model DataModel
-
-
-<div class="card text-center">
-    <div class="card-header">
-        @Model.GetCategoryTitle(Model.Movie.CategoryId).Title;
-    </div>
-    <div class="card-body">
-        <h5 class="card-title">@Model.Movie.Title</h5>
-        <p class="card-text">@Model.Movie.Text</p>
-
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Please select time
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                @foreach (var m in Model.GetMovieTime(Model.Movie.Id))
-                {
-                    <a class="dropdown-item" href="#">@m.StartTime</a>
-                }
-            </div>
+@if (Model.ActiveMovie != null)
+{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">@Model.ActiveMovie.Title</li>
+        </ol>
+    </nav>
+    <div class="media p-2">
+        <img class="align-self-start mr-3" src="@Model.ActiveMovie.Image" alt="Card image cap">
+        <div class="media-body">
+            <a class="h2 mt-0">@Model.ActiveMovie.Title</a>
+            <p>@Model.ActiveMovie.Text</p>
+            <p class="mb-3"><small class="text-muted">@Model.ActiveMovie.Duration min</small></p>
+            <a class="text-body">Category</a>
+            <a class="text-body" asp-controller="Movies" asp-action="Categories" asp-route="">@Model.ActiveMovie.CategoryId</a>
         </div>
-
-        <a href="#" class="btn btn-primary" asp-controller="Movies" asp-action="Book" asp-route-title="@Model.Movie.Id">Book</a>
+        <a class="btn btn-primary" asp-controller="Movies" asp-action="Book" asp-route-id="@Model.ActiveMovie.Id">Book</a>
     </div>
-    <div class="card-footer text-muted">
-        @Model.Movie.Duration
-    </div>
-</div>
+}
 

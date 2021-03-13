@@ -1,6 +1,7 @@
 ﻿using System;
 using CINEMA.Managers;
 
+
 namespace CINEMA
 {
     class Program
@@ -13,7 +14,8 @@ namespace CINEMA
             {
                 Console.WriteLine(item.Title);
             }
-            
+
+           
         }
     }
 }
