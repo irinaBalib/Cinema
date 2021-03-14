@@ -1,7 +1,7 @@
 ﻿@model DataModel
         <b>There are no bookings in your list!</b>
 
-    @if (Model.ListOfBooking.Count == 0)
+    @if (Model.ListOfBookings.Count == 0)
     {
         <b>There are no bookings in your list!</b>
     }
@@ -14,7 +14,7 @@
                 <th>Tickets</th>
                 <th></th>
             </tr>
-            @foreach (var book in Model.ListOfBooking)
+            @foreach (var book in Model.ListOfBookings)
             {
                 <tr>
                     <td></td>

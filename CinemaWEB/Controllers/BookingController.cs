@@ -41,7 +41,7 @@ namespace CinemaWEB.Controllers
                 if (String.IsNullOrEmpty(result))
                 {
                     // send to start
-                    return RedirectToAction("Topics", "News");
+                    return RedirectToAction("UserBookings");
                 }
                 else
                 {
@@ -51,17 +51,17 @@ namespace CinemaWEB.Controllers
 
             // if not valid -> return back to the same view
             return View(model);
-        }
-        public IActionResult Book(DateTime selectedTime)
-        {
-            DataModel model = new DataModel();
+       
+        //public IActionResult Book(DateTime selectedTime)
+        //{
+        //    DataModel model = new DataModel();
 
-            if (selectedTime != null)
-            {
-                model.SelectedMovie = tm.GetTimetableId(model.ActiveMovie.Id, selectedTime);
+        //    if (selectedTime != null)
+        //    {
+        //        model.SelectedMovie = tm.GetTimetableId(model.ActiveMovie.Id, selectedTime);
 
-            }
-            return RedirectToAction(nameof(UserBookings));
+        //    }
+        //    return RedirectToAction(nameof(UserBookings));
         }
         //public IActionResult SubmitBook()
         //{
@@ -77,8 +77,9 @@ namespace CinemaWEB.Controllers
 
         public IActionResult UserBookings()
         {
-
-            return View();
+            DataModel model = new DataModel();
+            model.ListOfBookings = bm.GetAllBookings();
+            return View(model);
         }
     }
 }

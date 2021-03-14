@@ -39,7 +39,6 @@ namespace CinemaWEB.Controllers
             }
             return View(model);
         }
-        
     }
 }
 
