@@ -9,7 +9,7 @@ namespace CINEMA.Managers
     public class TimetableManager
     {
 
-        public Timetable GetTimetableId(int movieId, DateTime dt)
+        public Timetable GetTimetable(int movieId, DateTime dt)
         {
             using (var db = new CinemaDatabase())
             {

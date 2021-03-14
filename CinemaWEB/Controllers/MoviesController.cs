@@ -12,8 +12,7 @@ namespace CinemaWEB.Controllers
     {
         private CategoryManager categories = new CategoryManager();
         private MovieManager movie = new MovieManager();
-        private BookingsManager bm = new BookingsManager();
-        private TimetableManager tm = new TimetableManager();
+        
 
 
         public IActionResult Categories(int? id)
@@ -40,34 +39,7 @@ namespace CinemaWEB.Controllers
             }
             return View(model);
         }
-        public IActionResult Book(DateTime selectedTime)
-        {
-            DataModel model = new DataModel();
-
-            if (selectedTime != null)
-            {
-                model.SelectedMovie = tm.GetTimetableId(model.ActiveMovie.Id, selectedTime);
-
-            }
-            return RedirectToAction(nameof(UserBookings));
-        }
-        //public IActionResult SubmitBook()
-        //{
-        //    DataModel model = new DataModel();
-
-        //    if (selectedTime != null)
-        //    {
-        //        model.SelectedMovie = tm.GetTimetableId(id, selectedTime);
-
-        //    }
-        //    return RedirectToAction(nameof(UserBookings));
-        //}
-
-        public IActionResult UserBookings()
-        {
-           
-            return View();
-        }
+        
     }
 }
 

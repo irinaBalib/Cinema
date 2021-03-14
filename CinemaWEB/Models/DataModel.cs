@@ -15,7 +15,8 @@ namespace CinemaWEB.Models
         public Categories ActiveCategory { get;set; }
         public Movies ActiveMovie { get; set; }
         public string CategoryTitle { get; set; }
-        public Timetable SelectedMovie { get; set; }
+        public DateTime SelectedTime { get; set; }
+        public Timetable ActiveTimetable { get; set; }
 
     }
 }

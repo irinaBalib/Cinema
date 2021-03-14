@@ -23,7 +23,8 @@ namespace CINEMA.Managers
             {
                 db.UserBookings.Add(new UserBookings()
                 {
-                    TimetableId = t.Id
+                    TimetableId = t.Id,
+                   Quantity = 1
                 });
 
                 db.SaveChanges();
