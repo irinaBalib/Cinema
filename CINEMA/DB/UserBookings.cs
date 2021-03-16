@@ -9,10 +9,9 @@ namespace CINEMA.DB
 {
     public partial class UserBookings
     {
-        public int Id { get; set; }
+      public int Id { get; set; }
         public int TimetableId { get; set; }
         public int Quantity { get; set; }
-
 
     }
 }

@@ -1,39 +1,37 @@
-﻿@model DataModel
-@if (Model.ActiveMovie != null)
-{
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">@Model.ActiveMovie.Title</li>
-        </ol>
-    </nav>
-    <div class="media p-2">
-        <img class="align-self-start mr-3" src="@Model.ActiveMovie.Image" alt="Card image cap">
-        <div class="media-body">
-            <a class="h2 mt-0">@Model.ActiveMovie.Title</a>
-            <p>@Model.ActiveMovie.Text</p>
-            <p class="mb-3"><small class="text-muted">@Model.ActiveMovie.Duration min</small></p>
-            <a class="text-dark">Category: </a>
-            <a class="text-body" asp-controller="Movies" asp-action="Categories" asp-route-id="@Model.ActiveMovie.CategoryId">@Model.CategoryTitle</a>
-            <div asp-validation-summary="All"></div>
-            <form class="mt-3" asp-controller="Booking" asp-action="Book" method="post">
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Please select time</label>
-                    <select class="form-control" id="exampleFormControlSelect1" asp-for="SelectedTime">
-                        @foreach (var t in Model.MovieTimes)
-                        {
-                            <option>
-                                <a class="dropdown-item">@t</a>
-                            </option>
-                        }
-                    </select>   
-                </div>
-            </form>
-        </div>
-        
+﻿@model MovieModel
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">@Model.ActiveMovie.Title</li>
+    </ol>
+</nav>
+<div class="media p-2">
+    <img class="align-self-start mr-3" src="@Model.ActiveMovie.Image" alt="Card image cap">
+    <div class="media-body">
+        <a class="h2 mt-0">@Model.ActiveMovie.Title</a>
+        <p>@Model.ActiveMovie.Text</p>
+        <p class="mb-3"><small class="text-muted">@Model.ActiveMovie.Duration min</small></p>
+        <a class="text-dark">Category: </a>
+        <a class="text-primary" asp-controller="Movies" asp-action="Categories" asp-route-id="@Model.ActiveMovie.CategoryId">@Model.MovieCategory.Title</a>
+
+        <div asp-validation-summary="All"></div>
+
+        <form asp-controller="Movies" asp-action="Movie" asp-route-id="@Model.SelectedTimetable.Id" method="post">
+            <div class="form-group">
+                <label asp-for="SelectedTime"></label>
+                <select asp-for="SelectedTime" class="form-control">
+                    <option></option>
+                    @foreach (var t in Model.AvailableTime)
+                    {
+                        <option>@t</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Book</button>
+        </form>
     </div>
-    
-    <a class="btn btn-primary btn-block mt-3" asp-controller="Booking" asp-action="Book">Book</a>
-}
+</div>
+
 
 
 

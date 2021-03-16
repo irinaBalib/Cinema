@@ -27,7 +27,7 @@ namespace CINEMA.Managers
         {
             using (var db = new CinemaDatabase())
             {
-                return db.Categories.FirstOrDefault(c => c.Id == movieId).Title;
+                return db.Categories.FirstOrDefault(c => c.Id == movieId.Value).Title;
             }
         }
        

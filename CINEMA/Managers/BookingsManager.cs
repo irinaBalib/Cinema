@@ -17,18 +17,19 @@ namespace CINEMA.Managers
             }
         }
 
-        public void BookMovie(Timetable t)
+        public string BookMovie(int t)
         {
             using (CinemaDatabase db = new CinemaDatabase())
             {
                 db.UserBookings.Add(new UserBookings()
                 {
-                    TimetableId = t.Id,
+                  TimetableId = t,
                    Quantity = 1
                 });
 
                 db.SaveChanges();
             }
+            return null;
         }
 
         

@@ -12,69 +12,48 @@ namespace CinemaWEB.Controllers
     {
         private BookingsManager bm = new BookingsManager();
         private TimetableManager tm = new TimetableManager();
-
+      
+        /*
         [HttpGet]
-        public IActionResult Book()
+        public IActionResult CreateBook(DateTime t)
         {
             DataModel model = new DataModel();
+            model.SelectedTime = t;
             return View(model);
         }
         [HttpPost]
-        public IActionResult Book(DataModel model)
+        public IActionResult CreateBook( DataModel model)
         {
-            // if valid -> save and send to another page
+            
             if (ModelState.IsValid)
             {
-                // manager call
-                // manager.CreateNew(model.Title);
-                // custom validations
-                // ...
-                //ModelState.AddModelError("validation", "Topic already exists!");
-
-                // send to start
-                //  return RedirectToAction("Topics", "News"); 
-                // manager call
-                int movieId = model.ActiveMovie.Id;
-                DateTime dt = model.SelectedTime;
-                model.ActiveTimetable = tm.GetTimetable(movieId, dt);
-                var result = bm.BookMovie(model.ActiveTimetable);///???
-                if (String.IsNullOrEmpty(result))
-                {
-                    // send to start
-                    return RedirectToAction("UserBookings");
-                }
-                else
-                {
-                    ModelState.AddModelError("validation", result);
-                }
+                model.ActiveTimetable = tm.GetTimetable(model.ActiveMovie.CategoryId, model.SelectedTime);
+                
             }
-
-            // if not valid -> return back to the same view
+           
             return View(model);
        
-        //public IActionResult Book(DateTime selectedTime)
-        //{
-        //    DataModel model = new DataModel();
-
-        //    if (selectedTime != null)
-        //    {
-        //        model.SelectedMovie = tm.GetTimetableId(model.ActiveMovie.Id, selectedTime);
-
-        //    }
-        //    return RedirectToAction(nameof(UserBookings));
         }
-        //public IActionResult SubmitBook()
-        //{
-        //    DataModel model = new DataModel();
-
-        //    if (selectedTime != null)
-        //    {
-        //        model.SelectedMovie = tm.GetTimetableId(id, selectedTime);
-
-        //    }
-        //    return RedirectToAction(nameof(UserBookings));
-        //}
-
+        public IActionResult SubmitBook(int? id)
+        {
+            DataModel model = new DataModel();
+            if (id.HasValue)
+            {
+                var result = bm.BookMovie(model.ActiveTimetable.Id);
+            if (String.IsNullOrEmpty(result))
+            {
+                // send to start
+                return RedirectToAction("Index");
+            }
+                else
+            {
+                ModelState.AddModelError("validation", result);
+            }
+            }
+            
+            return RedirectToAction(nameof(UserBookings));
+        }
+        */
         public IActionResult UserBookings()
         {
             DataModel model = new DataModel();

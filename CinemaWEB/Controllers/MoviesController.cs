@@ -12,54 +12,65 @@ namespace CinemaWEB.Controllers
     {
         private CategoryManager categories = new CategoryManager();
         private MovieManager movie = new MovieManager();
-        
-
-
+        private TimetableManager timetable = new TimetableManager();
+        private BookingsManager bookings = new BookingsManager();
         public IActionResult Categories(int? id)
         {
-            DataModel model = new DataModel();
+            CategoriesModel model = new CategoriesModel();
             model.ListOfCategories = categories.GetAllCategories();
             if (id.HasValue)
             {
                 model.ActiveCategory = categories.GetCategory(id.Value);
-
                 model.ListOfMovies = movie.GetMoviesByCategory(id.Value);
             }
             return View(model);
         }
+
+        [HttpGet]
         public IActionResult Movie(int? id)
         {
-            DataModel model = new DataModel();
-            model.ListOfMovies = movie.GetAllMovies();
+            MovieModel model = new MovieModel();
+        //   model.ListOfMovies = movie.GetAllMovies();
             if (id.HasValue)
             {
-                model.ActiveMovie = movie.GetMovieById(id);
-                model.CategoryTitle = categories.GetCategoryTitle(movie.GetMovieById(id).CategoryId);
-                model.MovieTimes = movie.GetMovieTimetable(id);
+                model.ActiveMovie = movie.GetMovieById(id.Value);
+                model.AvailableTime = timetable.GetMovieTimes(id.Value);
+                
+                model.MovieCategory = categories.GetCategory(model.ActiveMovie.CategoryId);
+
+                //DateTime selectedDT = DateTime.Parse(model.SelectedTime.Value);
+                DateTime selectedDT = model.SelectedTime.Value;
+                    model.SelectedTimetable = timetable.GetTimetable(model.ActiveMovie.Id, selectedDT );
+               
+                
+              
             }
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Movie(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                { 
+                    bookings.BookMovie(id);
+
+                    return RedirectToAction(nameof(Categories));
+                }
+                catch (Exception ex)
+                {
+                     ModelState.AddModelError("validation", ex.Message);
+                }
+            }
+
+            return View(nameof(Index));
         }
     }
 }
 
     
 
-    //    //public IActionResult ViewByCategory(int id)
-    //    //{
-    //    //    var data = movie.GetMoviesByCategory(id);
-    //    //    return View(data);
-    //    //}
-
-
-    //public IActionResult SelectTime(DateTime datetime)
-    //{
-    //    //use to create an entry to the MyBookings db
-    //    return View();
-    //}
-
-    //public IActionResult Book(string datetime, int movieId)
-    //{
-    //    return View();
-    //}
 
 
