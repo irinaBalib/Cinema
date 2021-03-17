@@ -39,23 +39,21 @@ namespace CinemaWEB.Controllers
                 model.MovieCategory = categories.GetCategory(model.ActiveMovie.CategoryId);
 
                 //DateTime selectedDT = DateTime.Parse(model.SelectedTime.Value);
-                DateTime selectedDT = model.SelectedTime.Value;
-                    model.SelectedTimetable = timetable.GetTimetable(model.ActiveMovie.Id, selectedDT );
+                //DateTime selectedDT = model.SelectedTime.Value;
+                   // model.SelectedTimetable = timetable.GetTimetable(model.ActiveMovie.Id, selectedDT );
                
-                
-              
             }
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Movie(int id)
+        public IActionResult Movie(MovieModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 { 
-                    bookings.BookMovie(id);
+                    bookings.BookMovie(model.ActiveMovie.Id, model.SelectedTime.Value);
 
                     return RedirectToAction(nameof(Categories));
                 }
@@ -65,7 +63,7 @@ namespace CinemaWEB.Controllers
                 }
             }
 
-            return View(nameof(Index));
+            return View(model);
         }
     }
 }

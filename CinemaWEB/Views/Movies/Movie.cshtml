@@ -16,7 +16,7 @@
 
         <div asp-validation-summary="All"></div>
 
-        <form asp-controller="Movies" asp-action="Movie" asp-route-id="@Model.SelectedTimetable.Id" method="post">
+        <form asp-controller="Movies" asp-action="Movie" method="post">
             <div class="form-group">
                 <label asp-for="SelectedTime"></label>
                 <select asp-for="SelectedTime" class="form-control">
