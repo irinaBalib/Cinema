@@ -1,5 +1,7 @@
 ﻿@model MovieModel
-
+@{
+    var timeList = new SelectList(Model.AvailableTimetables, "Id", "StartTime");
+}
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">@Model.ActiveMovie.Title</li>
@@ -18,13 +20,8 @@
 
         <form asp-controller="Movies" asp-action="Movie" method="post">
             <div class="form-group">
-                <label asp-for="SelectedTime"></label>
-                <select asp-for="SelectedTime" class="form-control">
-                    <option></option>
-                    @foreach (var t in Model.AvailableTime)
-                    {
-                        <option>@t</option>
-                    }
+                <label asp-for="SelectedTimeId"></label>
+                <select asp-for="SelectedTimeId" asp-items="timeList" class="form-control">
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Book</button>

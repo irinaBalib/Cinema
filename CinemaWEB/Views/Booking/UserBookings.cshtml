@@ -1,27 +1,27 @@
-﻿@model DataModel
-        <b>There are no bookings in your list!</b>
+﻿@model UserBookingsModel
 
-    @if (Model.ListOfBookings.Count == 0)
-    {
-        <b>There are no bookings in your list!</b>
-    }
-    else
-    {
-        <table class="table table-striped">
+
+@if (Model.ListOfBookings.Count == 0)
+{
+    <b>There are no bookings in your list!</b>
+}
+else
+{
+    <table class="table table-striped">
+        <tr>
+            <th>Movie</th>
+            <th>Start Time</th>
+            <th>Tickets</th>
+            <th></th>
+        </tr>
+        @foreach (var b in Model.ListOfBookings)
+        {
             <tr>
-                <th>Movie</th>
-                <th>Time</th>
-                <th>Tickets</th>
-                <th></th>
+                <td>@Model.Movie(b.TimetableId).Title</td>
+                <td>@Model.StartTime(b.TimetableId)</td>
+                <td>@b.Quantity</td>
+                <th><a asp-controller="Booking" asp-action="Remove" asp-route-id="@b.Id">Remove</a></th>
             </tr>
-            @foreach (var book in Model.ListOfBookings)
-            {
-                <tr>
-                    <td>aaa</td>
-                    <td>aaa</td>
-                    <td>aaa</td>
-                    <th></th>
-                </tr>
-            }
-        </table>
+        }
+    </table>
 }

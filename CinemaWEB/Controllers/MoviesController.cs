@@ -29,21 +29,16 @@ namespace CinemaWEB.Controllers
         [HttpGet]
         public IActionResult Movie(int? id)
         {
-            MovieModel model = new MovieModel();
-        //   model.ListOfMovies = movie.GetAllMovies();
+          MovieModel model = new MovieModel();
+           
             if (id.HasValue)
             {
                 model.ActiveMovie = movie.GetMovieById(id.Value);
-                model.AvailableTime = timetable.GetMovieTimes(id.Value);
-                
-                model.MovieCategory = categories.GetCategory(model.ActiveMovie.CategoryId);
+                   model.AvailableTimetables = timetable.GetMovieTimetable(id.Value);
 
-                //DateTime selectedDT = DateTime.Parse(model.SelectedTime.Value);
-                //DateTime selectedDT = model.SelectedTime.Value;
-                   // model.SelectedTimetable = timetable.GetTimetable(model.ActiveMovie.Id, selectedDT );
-               
-            }
-            return View(model);
+                       model.MovieCategory = categories.GetCategory(model.ActiveMovie.CategoryId);
+             }
+                return View(model);
         }
 
         [HttpPost]
@@ -53,9 +48,9 @@ namespace CinemaWEB.Controllers
             {
                 try
                 { 
-                    bookings.BookMovie(model.ActiveMovie.Id, model.SelectedTime.Value);
+                    bookings.BookMovie(model.SelectedTimeId.Value);
 
-                    return RedirectToAction(nameof(Categories));
+                    return RedirectToAction("UserBookings", "Booking" );
                 }
                 catch (Exception ex)
                 {
@@ -63,7 +58,7 @@ namespace CinemaWEB.Controllers
                 }
             }
 
-            return View(model);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

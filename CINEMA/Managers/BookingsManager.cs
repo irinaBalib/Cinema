@@ -17,23 +17,34 @@ namespace CINEMA.Managers
             }
         }
 
-        public string BookMovie(int movieId, DateTime dt)
+        public string BookMovie(int id)
         {
             using (CinemaDatabase db = new CinemaDatabase())
             {
-               int selectedTimetable = db.Timetable.FirstOrDefault(t => t.MovieId == movieId && t.StartTime == dt).Id;
                 db.UserBookings.Add(new UserBookings()
                 {
-                  TimetableId = selectedTimetable,
-                   Quantity = 1
+                    TimetableId = id,
+                    Quantity = 1
                 });
-
                 db.SaveChanges();
             }
             return null;
         }
 
-        
+        public UserBookings RemoveBooking (int id)
+        {
+            using(CinemaDatabase db = new CinemaDatabase())
+            {
+                var booking = db.UserBookings.FirstOrDefault(b => b.Id == id);
+                if (booking != null)
+                {
+                    db.UserBookings.Remove(booking);
+                    db.SaveChanges();
+                    return booking;
+                }
+            }
+            return null;
+        }
     }
 }
 

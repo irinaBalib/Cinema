@@ -17,19 +17,19 @@ namespace CINEMA.Managers
             }
         }
 
-        public List<DateTime> GetMovieTimes(int? id)
+        public List<Timetable> GetMovieTimetable(int? id)
         {
             using (CinemaDatabase db = new CinemaDatabase())
             {
-                List<DateTime> movieTimes = new List<DateTime> { };
-                foreach (var t in db.Timetable)
-                {
-                    if (t.MovieId == id)
-                    {
-                        movieTimes.Add(t.StartTime);
-                    }
-                }
-                return movieTimes;
+                return db.Timetable.Where(t => t.MovieId == id.Value).ToList();
+            }
+        }
+
+        public DateTime GetStartTime (int id)
+        {
+            using (CinemaDatabase db = new CinemaDatabase())
+            {
+                return db.Timetable.FirstOrDefault(t => t.Id == id).StartTime;
             }
         }
     }

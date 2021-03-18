@@ -11,12 +11,12 @@ namespace CinemaWEB.Models
     {
         public Movies ActiveMovie { get; set; }
         public Categories MovieCategory { get; set; }
-        public Timetable? SelectedTimetable { get; set; }
-        public List<DateTime> AvailableTime { get; set; }
+    
+        public List<Timetable> AvailableTimetables { get; set; }
 
-        [Required]
+       
         [Display(Name = "Please select time")]
-        public DateTime? SelectedTime { get; set; }
+        public int? SelectedTimeId { get; set; }
 
     }
 }

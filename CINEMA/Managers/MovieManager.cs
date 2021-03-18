@@ -31,7 +31,14 @@ namespace CINEMA.Managers
                 return db.Movies.FirstOrDefault(m => m.Id == id);
             }
         }
-        
-        
+
+        public Movies GetMovieByTimetableId(int id)
+        {
+            using (CinemaDatabase db = new CinemaDatabase())
+            {
+                int movieId = db.Timetable.FirstOrDefault(t => t.Id == id).MovieId;
+                return GetMovieById(movieId);
+            }
+        }
     }
 }
