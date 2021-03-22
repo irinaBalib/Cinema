@@ -17,7 +17,7 @@ namespace CinemaWEB.Controllers
         {
             UserBookingsModel model = new UserBookingsModel();
             model.ListOfBookings = bm.GetAllBookings();
-            return View(model);
+             return View(model);
         }
 
         public IActionResult Remove(int id)
@@ -26,6 +26,13 @@ namespace CinemaWEB.Controllers
 
             return RedirectToAction(nameof(UserBookings));
         }
+        public IActionResult Add(int id)
+        {
+            bm.AddBooking(id);
 
+            return RedirectToAction(nameof(UserBookings));
+        }
+
+      
     }
 }

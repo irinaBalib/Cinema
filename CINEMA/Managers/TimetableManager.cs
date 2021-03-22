@@ -32,5 +32,12 @@ namespace CINEMA.Managers
                 return db.Timetable.FirstOrDefault(t => t.Id == id).StartTime;
             }
         }
+        public decimal GetPrice(int id)
+        {
+            using (CinemaDatabase db = new CinemaDatabase())
+            {
+                return db.Timetable.FirstOrDefault(t => t.Id == id).Price;
+            }
+        }
     }
 }

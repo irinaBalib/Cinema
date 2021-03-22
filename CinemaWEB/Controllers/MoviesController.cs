@@ -48,7 +48,7 @@ namespace CinemaWEB.Controllers
             {
                 try
                 { 
-                    bookings.BookMovie(model.SelectedTimeId.Value);
+                    bookings.BookMovie(model.SelectedTimeId.Value);   // to book a movie TimetableId is given
 
                     return RedirectToAction("UserBookings", "Booking" );
                 }

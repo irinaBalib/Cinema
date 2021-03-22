@@ -11,6 +11,7 @@ namespace CinemaWEB.Models
     {
         public List<UserBookings> ListOfBookings { get; set; }
         public UserBookings Booking { get; set; }
+        
         public Movies Movie (int id)
         {
             MovieManager mm = new MovieManager();
@@ -22,5 +23,7 @@ namespace CinemaWEB.Models
             TimetableManager tm = new TimetableManager();
             return tm.GetStartTime(id);
         }
+
+      
     }
 }

@@ -17,34 +17,73 @@ namespace CINEMA.Managers
             }
         }
 
-        public string BookMovie(int id)
+        public void BookMovie(int id)
         {
             using (CinemaDatabase db = new CinemaDatabase())
             {
-                db.UserBookings.Add(new UserBookings()
+               var booking = db.UserBookings.FirstOrDefault(b => b.TimetableId == id);
+               
+                if (booking == null)
                 {
-                    TimetableId = id,
-                    Quantity = 1
-                });
+                     db.UserBookings.Add(new UserBookings()
+                     {
+                        TimetableId = id,
+                         Quantity = 1,
+                         Price = db.Timetable.FirstOrDefault(t => t.Id == id).Price,
+                        Amount = db.Timetable.FirstOrDefault(t => t.Id == id).Price
+                     });
+                
+                }
+                else
+                {
+                    booking.Quantity++;
+                    booking.Amount = booking.Quantity * booking.Price;
+                }
                 db.SaveChanges();
             }
-            return null;
+           
         }
 
+        
         public UserBookings RemoveBooking (int id)
         {
             using(CinemaDatabase db = new CinemaDatabase())
             {
                 var booking = db.UserBookings.FirstOrDefault(b => b.Id == id);
-                if (booking != null)
+                if (booking != null && booking.Quantity == 1)
                 {
                     db.UserBookings.Remove(booking);
+                    db.SaveChanges();
+                    return booking;
+                }
+                else if (booking != null && booking.Quantity > 1)
+                {
+                    booking.Quantity--;
+                    booking.Amount = booking.Quantity * booking.Price;
                     db.SaveChanges();
                     return booking;
                 }
             }
             return null;
         }
+
+        public UserBookings AddBooking(int id)
+        {
+            using (CinemaDatabase db = new CinemaDatabase())
+            {
+                var booking = db.UserBookings.FirstOrDefault(b => b.Id == id);
+                if (booking != null)
+                {
+                    booking.Quantity++;
+                    booking.Amount = booking.Quantity * booking.Price;
+                    db.SaveChanges();
+                    return booking;
+                }
+            }
+            return null;
+        }
+
+
     }
 }
 

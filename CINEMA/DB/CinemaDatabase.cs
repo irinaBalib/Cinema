@@ -59,7 +59,16 @@ namespace CINEMA.DB
 
             modelBuilder.Entity<Timetable>(entity =>
             {
+                entity.Property(e => e.Price).HasColumnType("decimal(8, 2)");
+
                 entity.Property(e => e.StartTime).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<UserBookings>(entity =>
+            {
+                entity.Property(e => e.Amount).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
             });
 
             OnModelCreatingPartial(modelBuilder);

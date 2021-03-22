@@ -12,16 +12,23 @@ else
             <th>Movie</th>
             <th>Start Time</th>
             <th>Tickets</th>
-            <th></th>
+            <th>Price per Ticket</th>
+            <th>Amount</th>
         </tr>
         @foreach (var b in Model.ListOfBookings)
         {
-            <tr>
-                <td>@Model.Movie(b.TimetableId).Title</td>
-                <td>@Model.StartTime(b.TimetableId)</td>
-                <td>@b.Quantity</td>
-                <th><a asp-controller="Booking" asp-action="Remove" asp-route-id="@b.Id">Remove</a></th>
-            </tr>
+    <tr>
+        <td><a class="nav-link" asp-controller="Movies" asp-action="Movie" asp-route-id="@Model.Movie(b.TimetableId).Id">@Model.Movie(b.TimetableId).Title</a></td>
+        <td>@Model.StartTime(b.TimetableId)</td>
+        <td><div class="justify-content-center">
+        <a type="button" class="btn btn-outline-dark" asp-controller="Booking" asp-action="Remove" asp-route-id="@b.Id"> - </a><span> @b.Quantity </span><a type="button" class="btn btn-outline-dark" asp-controller="Booking" asp-action="Add" asp-route-id="@b.Id"> + </a>
+        </div></td>
+        <td>@b.Price EUR</td>
+        <td>@b.Amount EUR</td>
+    </tr>
         }
     </table>
+    <a class="alert alert-primary">
+        Total Amount:  @Model.ListOfBookings.Sum(b => b.Amount)  EUR
+    </a>
 }
